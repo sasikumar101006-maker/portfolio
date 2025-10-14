@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeeva K - Python Full Stack Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
+            color: #ffffff;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Glass effects */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #22d3ee, #3b82f6, #22d3ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(to bottom right, #06b6d4, #2563eb);
+            transition: all 0.3s;
+        }
+
+        .logo:hover .logo-icon {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: none;
+            border: none;
+            color: #d1d5db;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background: rgba(6, 182, 212, 0.2);
+            color: #22d3ee;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav .nav-btn {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+        }
+
+        section {
+            padding: 3rem 1rem;
+        }
+
+        /* Home page */
+        .hero-icon {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #22d3ee;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .divider {
+            height: 4px;
+            width: 96px;
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            border-radius: 9999px;
+            margin: 0 auto 3rem;
+        }
+
+        .about-section {
+            margin-bottom: 5rem;
+        }
+
+        .about-card {
+            padding: 2.5rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+        .about-text {
+            color: #d1d5db;
+            line-height: 1.625;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(to bottom right, #06b6d4, #2563eb);
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            color: #22d3ee;
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        /* Projects page */
+        .project-card {
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-icon-wrapper {
+            width: 128px;
+            height: 128px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-description {
+            color: #d1d5db;
+            font-size: 1.125rem;
+            line-height: 1.625;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #22d3ee;
+            margin-bottom: 0.75rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 0.5rem;
+            color: #d1d5db;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(to right, #06b6d4, #2563eb);
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Contact page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            padding: 1.5rem;
+            text-decoration: none;
+        }
+
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #22d3ee;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: #d1d5db;
+            font-size: 0.875rem;
+            word-break: break-all;
+        }
+
+        .contact-form {
+            padding: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #d1d5db;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 150px;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 2rem 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-icon {
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover .social-icon {
+            color: #22d3ee;
+        }
+
+        .footer-text {
+            text-align: center;
+        }
+
+        .copyright {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .built-with {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        /* SVG Icons */
+        svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-lg {
+            width: 64px;
+            height: 64px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav.active {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-icon {
+                width: 128px;
+                height: 128px;
+            }
+
+            .project-icon-wrapper {
+                width: 96px;
+                height: 96px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .features-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-group.full-width {
+                grid-column: 1 / -1;
+            }
+
+            .project-content {
+                flex-direction: row;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Hidden utility */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="glass">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showPage('home'); return false;">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <span class="logo-text gradient-text">Jeeva K</span>
+                </a>
+
+                <nav class="nav">
+                    <button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button>
+                    <button class="nav-btn" data-page="projects" onclick="showPage('projects')">Projects</button>
+                    <button class="nav-btn" data-page="contact" onclick="showPage('contact')">Contact</button>
+                </nav>
+
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg id="menu-icon" width="24" height="24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="close-icon" width="24" height="24" style="display: none;">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="mobile-nav" id="mobile-nav">
+                <button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button>
+                <button class="nav-btn" data-page="projects" onclick="showPage('projects')">Projects</button>
+                <button class="nav-btn" data-page="contact" onclick="showPage('contact')">Contact</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home-page" class="page">
+            <div class="container" style="max-width: 1152px;">
+                <div class="about-section">
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <div class="hero-icon glass-card">
+                            <svg class="icon-lg" style="color: #22d3ee;">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+
+                        <h1 class="hero-title">
+                            Hi, I'm <span class="gradient-text">Jeeva K</span>
+                        </h1>
+
+                        <p class="hero-subtitle">Python Full Stack Developer</p>
+
+                        <div class="divider"></div>
+                    </div>
+
+                    <div class="glass-card about-card">
+                        <div class="section-title">
+                            <svg style="color: #22d3ee;">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            <h2>About Me</h2>
+                        </div>
+
+                        <p class="about-text">
+                            I'm a passionate Full Stack Developer with expertise in building modern, scalable web applications.
+                            With a strong foundation in both frontend and backend technologies, I create seamless digital experiences
+                            that combine elegant design with robust functionality.
+                        </p>
+
+                        <p class="about-text">
+                            My journey in web development has equipped me with a comprehensive understanding of the entire development
+                            lifecycle, from conceptualization and design to deployment and maintenance. I thrive on solving complex
+                            problems and continuously learning new technologies to stay at the forefront of web development.
+                        </p>
+
+                        <p class="about-text">
+                            When I'm not coding, I enjoy exploring new frameworks, contributing to open-source projects, and sharing
+                            knowledge with the developer community. I believe in writing clean, maintainable code and following
+                            industry best practices to deliver high-quality solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <h2 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem;">
+                            Skills & <span class="gradient-text">Technologies</span>
+                        </h2>
+                        <p style="color: #9ca3af; font-size: 1.125rem;">
+                            A comprehensive toolkit for building full-stack applications
+                        </p>
+                    </div>
+
+                    <div class="skills-grid">
+                        <div class="glass-card skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon">
+                                    <svg width="24" height="24" fill="white">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="skill-title">Frontend</h3>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">Tailwind CSS</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon">
+                                    <svg width="24" height="24" fill="white">
+                                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                                    </svg>
+                                </div>
+                                <h3 class="skill-title">Backend</h3>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">FastAPI</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">REST APIs</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon">
+                                    <svg width="24" height="24" fill="white">
+                                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="skill-title">Database</h3>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">SQLite</span>
+                                <span class="tech-tag">Supabase</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card skill-card">
+                            <div class="skill-header">
+                                <div class="skill-icon">
+                                    <svg width="24" height="24" fill="white">
+                                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="skill-title">Tools & Others</h3>
+                            </div>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Git</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Linux</span>
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">CI/CD</span>
+                                <span class="tech-tag">Postman</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Page -->
+        <section id="projects-page" class="page hidden">
+            <div class="container" style="max-width: 1152px;">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">
+                        My <span class="gradient-text">Projects</span>
+                    </h1>
+                    <p style="color: #9ca3af; font-size: 1.25rem; max-width: 672px; margin: 0 auto;">
+                        A showcase of recent work demonstrating my expertise in full-stack development
+                    </p>
+                </div>
+
+                <div>
+                    <!-- Project 1: Gym Website -->
+                    <div class="glass-card project-card">
+                        <div class="project-content">
+                            <div class="project-icon-wrapper" style="background: linear-gradient(to bottom right, #f97316, #dc2626);">
+                                <svg width="64" height="64" fill="white">
+                                    <path d="M6.5 6.5l4-4 4 4"></path>
+                                    <path d="M10.5 2.5v8"></path>
+                                    <path d="M17.5 17.5l4 4 4-4"></path>
+                                    <path d="M21.5 21.5v-8"></path>
+                                    <path d="M2 12h5"></path>
+                                    <path d="M17 12h5"></path>
+                                    <path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2"></path>
+                                </svg>
+                            </div>
+
+                            <div class="project-info">
+                                <h2 class="project-title">FitZone Gym Website</h2>
+
+                                <p class="project-description">
+                                    A modern, fully responsive gym website featuring membership plans, class schedules, trainer profiles, and online booking system. Built with a focus on user experience and conversion optimization.
+                                </p>
+
+                                <div style="margin-bottom: 1.5rem;">
+                                    <h3 class="features-title">Key Features</h3>
+                                    <div class="features-list">
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Dynamic class scheduling system</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Membership management dashboard</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Trainer profile pages with availability</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Online payment integration</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Responsive design for all devices</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-bottom: 1.5rem;">
+                                    <h3 class="features-title">Technologies Used</h3>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">TypeScript</span>
+                                        <span class="tech-tag">Tailwind CSS</span>
+                                        <span class="tech-tag">Django</span>
+                                        <span class="tech-tag">PostgreSQL</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-links">
+                                    <a href="#" class="btn-primary">
+                                        <svg class="icon-sm">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                        <span>Live Demo</span>
+                                    </a>
+                                    <a href="https://github.com/sasikumar101006-maker" target="_blank" class="btn-secondary">
+                                        <svg class="icon-sm">
+                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                        </svg>
+                                        <span>View Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: E-Commerce -->
+                    <div class="glass-card project-card">
+                        <div class="project-content">
+                            <div class="project-icon-wrapper" style="background: linear-gradient(to bottom right, #06b6d4, #2563eb);">
+                                <svg width="64" height="64" fill="white">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                            </div>
+
+                            <div class="project-info">
+                                <h2 class="project-title">E-Commerce Platform</h2>
+
+                                <p class="project-description">
+                                    A full-featured e-commerce platform with product catalog, shopping cart, secure checkout, and admin dashboard. Implements best practices for security and scalability.
+                                </p>
+
+                                <div style="margin-bottom: 1.5rem;">
+                                    <h3 class="features-title">Key Features</h3>
+                                    <div class="features-list">
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Product search and filtering</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>User authentication and authorization</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Shopping cart with persistent state</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Secure payment processing with Stripe</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span style="color: #22d3ee; margin-top: 4px;">•</span>
+                                            <span>Admin panel for inventory management</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-bottom: 1.5rem;">
+                                    <h3 class="features-title">Technologies Used</h3>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">FastAPI</span>
+                                        <span class="tech-tag">MongoDB</span>
+                                        <span class="tech-tag">Stripe</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-links">
+                                    <a href="#" class="btn-primary">
+                                        <svg class="icon-sm">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                        <span>Live Demo</span>
+                                    </a>
+                                    <a href="https://github.com/sasikumar101006-maker" target="_blank" class="btn-secondary">
+                                        <svg class="icon-sm">
+                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                        </svg>
+                                        <span>View Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 4rem; text-align: center;">
+                    <div class="glass-card" style="padding: 2rem; display: inline-block;">
+                        <p style="color: #d1d5db; font-size: 1.125rem; margin-bottom: 1rem;">
+                            Want to see more projects?
+                        </p>
+                        <a href="https://github.com/sasikumar101006-maker" target="_blank" class="btn-primary">
+                            <svg class="icon-sm">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            <span>Visit My GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact-page" class="page hidden">
+            <div class="container" style="max-width: 1024px;">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">
+                        Get In <span class="gradient-text">Touch</span>
+                    </h1>
+                    <p style="color: #9ca3af; font-size: 1.25rem; max-width: 672px; margin: 0 auto;">
+                        Have a project in mind or want to collaborate? Feel free to reach out through any of these channels
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <a href="mailto:sasikumar101006@gmail.com" class="glass-card contact-card">
+                        <div class="contact-icon" style="background: linear-gradient(to bottom right, #ef4444, #ea580c);">
+                            <svg width="28" height="28" fill="white">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="contact-label">Email</h3>
+                        <p class="contact-value">sasikumar101006@gmail.com</p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/jeeva-k-042b64259" target="_blank" class="glass-card contact-card">
+                        <div class="contact-icon" style="background: linear-gradient(to bottom right, #3b82f6, #0891b2);">
+                            <svg width="28" height="28" fill="white">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="contact-label">LinkedIn</h3>
+                        <p class="contact-value">Jeeva K</p>
+                    </a>
+
+                    <a href="https://github.com/sasikumar101006-maker" target="_blank" class="glass-card contact-card">
+                        <div class="contact-icon" style="background: linear-gradient(to bottom right, #4b5563, #334155);">
+                            <svg width="28" height="28" fill="white">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </div>
+                        <h3 class="contact-label">GitHub</h3>
+                        <p class="contact-value">@sasikumar101006-maker</p>
+                    </a>
+                </div>
+
+                <div class="glass-card contact-form">
+                    <div class="section-title">
+                        <div class="skill-icon">
+                            <svg width="24" height="24" fill="white">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h2>Send a Message</h2>
+                    </div>
+
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Your Email</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                            <label class="form-label" for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry" required>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project or idea..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="font-size: 1.125rem;">
+                            <svg class="icon-sm">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="glass-card" style="margin-top: 3rem; padding: 2rem; text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <svg width="20" height="20" style="color: #22d3ee;">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Location</h3>
+                    </div>
+                    <p style="color: #d1d5db;">Available for remote opportunities worldwide</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://github.com/sasikumar101006-maker" target="_blank" class="glass-card social-link">
+                        <svg class="social-icon" width="20" height="20">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jeeva-k-042b64259" target="_blank" class="glass-card social-link">
+                        <svg class="social-icon" width="20" height="20">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="mailto:sasikumar101006@gmail.com" class="glass-card social-link">
+                        <svg class="social-icon" width="20" height="20">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="footer-text">
+                    <p class="copyright">&copy; <span id="year"></span> Jeeva K. All rights reserved.</p>
+                    <p class="built-with">Built with React, TypeScript & Tailwind CSS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Page navigation
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageName + '-page');
+            if (selectedPage) {
+                selectedPage.classList.remove('hidden');
+            }
+
+            // Update nav button states (desktop)
+            const navButtons = document.querySelectorAll('.nav .nav-btn');
+            navButtons.forEach(btn => {
+                if (btn.dataset.page === pageName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update nav button states (mobile)
+            const mobileNavButtons = document.querySelectorAll('.mobile-nav .nav-btn');
+            mobileNavButtons.forEach(btn => {
+                if (btn.dataset.page === pageName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.classList.remove('active');
+            document.getElementById('menu-icon').style.display = 'block';
+            document.getElementById('close-icon').style.display = 'none';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobile-nav');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            if (mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                menuIcon.style.display = 'block';
+                closeIcon.style.display = 'none';
+            } else {
+                mobileNav.classList.add('active');
+                menuIcon.style.display = 'none';
+                closeIcon.style.display = 'block';
+            }
+        }
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+
+            // Create mailto link
+            const mailtoLink = `mailto:sasikumar101006@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent('From: ' + data.name + ' (' + data.email + ')\n\n' + data.message)}`;
+            window.location.href = mailtoLink;
+
+            // Reset form
+            event.target.reset();
+            return false;
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
